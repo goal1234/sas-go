@@ -1,0 +1,110 @@
+/* SAMPLE SAS PROGRAM "GR_MAP.SAS" */
+
+/* GENERATES SURFACE AND BLOCK MAPS OF USA */
+/* USES SAS DATA SET PROVIDED BY SAS INSTITUTE TO PRODUCE THE MAPS */
+
+
+/* FOR MORE DETAILS ON THE PROCEDURES USED IN THIS SAMPLE PROGRAM SEE:
+   SAS/GRAPH SOFTWARE, REFERENCE, VERSION 6, FIRST EDITION, VOLUME 2,
+   CHAPTER 29  */
+
+
+
+
+GOPTIONS RESET=GLOBAL GUNIT=PCT BORDER FTEXT=SWISSB
+         HTITLE=2 HTEXT=1 ;
+DATA SITES;
+     LENGTH STATE 3;
+     INPUT STATE SITES;
+     CARDS;
+1   80
+2   31
+3   50
+4   34
+5   45
+6   36
+7   21
+8   39
+9   18
+10  25
+11  23
+12  33
+13  43
+14  56
+15  28
+16  52
+17  37
+18  49
+19  47
+20  39
+21  51
+22  31
+23  89
+24  94
+25  90
+26  75
+27  85
+28  70
+29  58
+30  82
+31  45
+32  28
+33  94
+34  21
+35  44
+36  80
+37  93
+38  56
+39  93
+40  85
+41  98
+42  85
+43  60
+44  55
+45  84
+46  54
+47  69
+48  74
+49  89
+50  67
+51  58
+52  65
+53  49
+54  81
+55  70
+56  59
+;
+RUN;
+
+TITLE1 'USA Map With Random Data Set';
+
+FOOTNOTE1 J=L 'USA MAP RANDOM DATA SET SUPPLIED'
+              'WITH SAS/GRAPH' '02'X 'SOFTWARE';
+
+PATTERN1 VALUE=SOLID;
+PATTERN2 VALUE=MEMPTY;
+
+PROC GMAP MAP=MAPS.US DATA=SITES; /* Uses a SAS data set "US" from the MAPS data library provided by SAS
+                                    (Click on "Libraries" under the "Explorer" window) */
+ID STATE ;
+
+SURFACE SITES/constant=35
+             nlines=100
+             tilt=10;   /* PRODUCES SURFACE MAP OF */
+                          /* USA FOR THE VARIABLE SITES */
+
+CHORO SITES/COUTLINE=gray;  /* PRODUCES MAP OF USA IN COLOR */
+
+block sites/ levels=8
+             xview=0.50
+             zview=3;  /* PRODUCES BLOCK MAP OF USA FOR THE VARIABLE SITES */
+run;
+
+
+PROC GMAP MAP=MAPS.US DATA=SITES;
+ where state=21;   /* PRODUCES MAP OF A SINGLE STATE IN US */
+ id state;
+surface sites/constant=40
+             nlines=100
+             tilt=10;
+RUN ;
