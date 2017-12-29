@@ -1,0 +1,22 @@
+# Task
+
+## data entry, retrieval, and management
+## report writing and graphics design
+## statistical and mathematical analysis
+## business forecasting and decision support
+## operations research and project management
+## applications development
+
+---
+
+
+# Output
+
+*一般都有神马输出
+
+1. a SAS data set
+2. the SAS log
+3. a report or simple listing
+4. other SAS files such as catalogs
+5. external files or entries in other databases
+
